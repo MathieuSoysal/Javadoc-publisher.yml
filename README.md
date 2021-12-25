@@ -50,4 +50,4 @@ If your Java project is not in Java 17, don't forget to modify that line:
 ```
 
 ## License
-The Dockerfile and associated scripts and documentation in this project are released under the GPL-3.0 License.
+The Dockerfile and associated scripts and documentation in this project are released under the [Apache 2.0 License](https://github.com/MathieuSoysal/Javadoc-publisher.yml/blob/main/LICENSE).
