@@ -1,4 +1,5 @@
 name: Deploy Javadoc
+description: 'Automatically  generate your Javadoc from your maven project and deploy it with GitHub Page on javadoc branch.'
 
 on:
   push:
