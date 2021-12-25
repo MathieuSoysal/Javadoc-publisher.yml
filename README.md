@@ -14,7 +14,6 @@ on:
   push:
     branches:
       - master
-      - main
 
 jobs:
   publish:
@@ -30,7 +29,7 @@ jobs:
       - name: Generate Javadoc
         run: mvn org.apache.maven.plugins:maven-javadoc-plugin:3.3.1:aggregate
       - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@3.5.9
+        uses: JamesIves/github-pages-deploy-action@4.1.8
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: javadoc
