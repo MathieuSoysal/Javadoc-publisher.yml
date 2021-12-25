@@ -1,5 +1,5 @@
 # Javadoc-publisher.yml
-Automatically generate Javadoc from your maven project and deploy it with GitHub Page via javadoc branch.
+Automatically generate Javadoc from your maven project and deploy it with GitHub Page on *javadoc* branch.
 
 ## Requirements
 - Your project need to use Maven
