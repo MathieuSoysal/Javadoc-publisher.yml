@@ -1,5 +1,5 @@
 # Javadoc-publisher.yml
-Generate Javadoc from your maven project and deploy it with GitHub Page.
+Automatically generate Javadoc from your maven project and deploy it with GitHub Page via javadoc branch.
 
 ## Requirements
 - Your project need to use Maven
@@ -48,6 +48,10 @@ If your Java project is not in Java 17, don't forget to modify that line:
         distribution: 'adopt'
         java-version: 17
 ```
+
+### GitHub page
+
+Don't forget to configure your repository settings with your new GitHub Page. 😉
 
 ## License
 The Dockerfile and associated scripts and documentation in this project are released under the [Apache 2.0 License](https://github.com/MathieuSoysal/Javadoc-publisher.yml/blob/main/LICENSE).
