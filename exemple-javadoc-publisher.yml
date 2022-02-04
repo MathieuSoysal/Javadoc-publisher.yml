@@ -28,7 +28,3 @@ jobs:
           CLEAN: true
           FOLDER: target/site/apidocs
           TARGET_FOLDER: javadoc
-
-branding:
-  icon: 'book-open'
-  color: 'white'
