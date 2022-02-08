@@ -11,7 +11,6 @@ inputs:
   GITHUB_TOKEN: # GitHub Token
     description: 'The GitHub token the GitHub repository'
     required: true
-    default: ${{ secrets.GITHUB_TOKEN }}
   javadoc-branch: # branch where the javadoc is hosted
     description: 'Branch where the javadoc is hosted'
     required: true
