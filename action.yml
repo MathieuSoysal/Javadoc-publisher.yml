@@ -28,6 +28,7 @@ runs:
       distribution: 'adopt'
   - name: Generate Javadoc
     run: mvn org.apache.maven.plugins:maven-javadoc-plugin:3.3.1:aggregate
+    shell: bash
   - name: Deploy 🚀
     uses: JamesIves/github-pages-deploy-action@4.1.8
     with:
