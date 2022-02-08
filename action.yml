@@ -1,42 +1,39 @@
 name: Deploy Javadoc
 description: 'Automatically  generate your Javadoc from your maven project and deploy it with GitHub Page on javadoc branch.'
-
+branding:
+  icon: 'book-open'
+  color: 'white'
 inputs:
   java-version:  # version of java
     description: 'Java version inside your project'
     required: true
     default: '17'
- GITHUB_TOKEN: # GitHub Token
+  GITHUB_TOKEN: # GitHub Token
     description: 'The GitHub token the GitHub repository'
     required: true
     default: ${{ secrets.GITHUB_TOKEN }}
- javadoc-branch: # branch where the javadoc is hosted
+  javadoc-branch: # branch where the javadoc is hosted
     description: 'Branch where the javadoc is hosted'
     required: true
     default: javadoc
  
-
 runs:
-    using: "composite"
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-java@v2
-        with:
-          java-version: ${{ inputs.java-version }}
-          distribution: 'adopt'
-      - name: Generate Javadoc
-        run: mvn org.apache.maven.plugins:maven-javadoc-plugin:3.3.1:aggregate
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@4.1.8
-        with:
-          GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
-          BRANCH: ${{ inputs.javadoc-branch }}
-          CLEAN: true
-          FOLDER: target/site/apidocs
-          TARGET_FOLDER: javadoc
-
-branding:
-  icon: 'book-open'
-  color: 'white'
+  using: "composite"
+  steps:
+  - uses: actions/checkout@v2
+    with:
+      fetch-depth: 0
+  - uses: actions/setup-java@v2
+    with:
+      java-version: ${{ inputs.java-version }}
+      distribution: 'adopt'
+  - name: Generate Javadoc
+    run: mvn org.apache.maven.plugins:maven-javadoc-plugin:3.3.1:aggregate
+  - name: Deploy 🚀
+    uses: JamesIves/github-pages-deploy-action@4.1.8
+    with:
+      GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
+      BRANCH: ${{ inputs.javadoc-branch }}
+      CLEAN: true
+      FOLDER: target/site/apidocs
+      TARGET_FOLDER: javadoc
