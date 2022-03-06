@@ -25,6 +25,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           javadoc-branch: javadoc
           java-version: 17
+          target-folder: javadoc 
 ```
 
 ### GitHub page
