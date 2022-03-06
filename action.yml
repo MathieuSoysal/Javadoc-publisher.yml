@@ -15,6 +15,10 @@ inputs:
     description: 'Branch where the javadoc is hosted'
     required: true
     default: javadoc
+  target-folder: # target folder for the javadoc contents
+    description: 'Directory where the javadoc contents should be stored'
+    required: true
+    default: .
  
 runs:
   using: "composite"
@@ -32,8 +36,8 @@ runs:
   - name: Deploy 🚀
     uses: JamesIves/github-pages-deploy-action@4.1.8
     with:
-      GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
-      BRANCH: ${{ inputs.javadoc-branch }}
-      CLEAN: true
-      FOLDER: target/site/apidocs
-      TARGET_FOLDER: javadoc
+      token: ${{ inputs.GITHUB_TOKEN }}
+      branch: ${{ inputs.javadoc-branch }}
+      clean: true
+      folder: target/site/apidocs
+      target-folder: ${{ inputs.target-folder }} 
