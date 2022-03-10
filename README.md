@@ -14,6 +14,7 @@ on:
   push:
     branches:
       - master
+      - main
 
 jobs:
   publish:
