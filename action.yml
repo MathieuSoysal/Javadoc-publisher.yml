@@ -34,7 +34,7 @@ runs:
     run: mvn org.apache.maven.plugins:maven-javadoc-plugin:3.4.0:aggregate
     shell: bash
   - name: Deploy 🚀
-    uses: JamesIves/github-pages-deploy-action@4.3.3
+    uses: JamesIves/github-pages-deploy-action@v4.4.0
     with:
       token: ${{ inputs.GITHUB_TOKEN }}
       branch: ${{ inputs.javadoc-branch }}
