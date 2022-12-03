@@ -2,5 +2,14 @@
   "image": "mcr.microsoft.com/devcontainers/universal:2",
   "features": {
     "ghcr.io/dhoeric/features/act:1": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+		"GitHub.copilot",
+		"GitHub.copilot-labs",
+		"cschleiden.vscode-github-actions"
+	]
+    }
   }
 }
