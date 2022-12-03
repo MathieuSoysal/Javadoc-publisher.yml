@@ -11,20 +11,6 @@ jobs:
     
     name: Test with Java ${{ matrix.java }}
     steps:
-#### This step is only needed for GHA local runner, act:
-# https://github.com/nektos/act
-      - name: Install curl (for nektos/act local CI testing)
-        run: apt-get update && apt-get install build-essential curl pkg-config openssl -y
-      - name: Download Maven
-        run: |
-          curl -sL https://www-eu.apache.org/dist/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.zip -o maven.zip
-          apt-get update
-          apt-get -y install unzip
-          unzip -d /usr/share maven.zip
-          rm maven.zip
-          ln -s /usr/share/apache-maven-3.6.3/bin/mvn /usr/bin/mvn
-          echo "M2_HOME=/usr/share/apache-maven-3.6.3" | tee -a /etc/environment
-####
     
       - uses: actions/checkout@v3
       - uses: ./ # Uses an action in the root directory
