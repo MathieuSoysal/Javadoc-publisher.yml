@@ -8,6 +8,7 @@ inputs:
     description: 'Java version inside your project'
     required: true
     default: '17'
+    type: string
   GITHUB_TOKEN: # GitHub Token
     description: 'The GitHub token the GitHub repository'
     required: true
@@ -15,10 +16,17 @@ inputs:
     description: 'Branch where the javadoc is hosted'
     required: true
     default: javadoc
+    type: string
   target-folder: # target folder for the javadoc contents
     description: 'Directory where the javadoc contents should be stored'
     required: true
     default: .
+    type: string
+  without-deploy: # deploy the javadoc to the javadoc branch, is used for development testing with nektos/act
+    description: 'Deploy the javadoc to the javadoc branch'
+    required: false
+    default: 'false'
+    type: boolean
  
 runs:
   using: "composite"
@@ -34,6 +42,7 @@ runs:
     run: mvn org.apache.maven.plugins:maven-javadoc-plugin:3.4.0:aggregate
     shell: bash
   - name: Deploy 🚀
+    if: ${{ inputs.without-deploy == 'false' }}
     uses: JamesIves/github-pages-deploy-action@v4.4.0
     with:
       token: ${{ inputs.GITHUB_TOKEN }}

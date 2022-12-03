@@ -1,0 +1,42 @@
+name: Test Actions
+
+on: [pull_request, push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        java: [ '17' ]
+    
+    name: Test with Java ${{ matrix.java }}
+    steps:
+#### This step is only needed for GHA local runner, act:
+# https://github.com/nektos/act
+      - name: Install curl (for nektos/act local CI testing)
+        run: apt-get update && apt-get install build-essential curl pkg-config openssl -y
+      - name: Download Maven
+        run: |
+          curl -sL https://www-eu.apache.org/dist/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.zip -o maven.zip
+          apt-get update
+          apt-get -y install unzip
+          unzip -d /usr/share maven.zip
+          rm maven.zip
+          ln -s /usr/share/apache-maven-3.6.3/bin/mvn /usr/bin/mvn
+          echo "M2_HOME=/usr/share/apache-maven-3.6.3" | tee -a /etc/environment
+####
+    
+      - uses: actions/checkout@v3
+      - uses: ./ # Uses an action in the root directory
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          javadoc-branch: javadoc-test
+          java-version: ${{ matrix.java }}
+          target-folder: javadoc
+          without-deploy: true
+
+      - uses: GuillaumeFalourd/assert-command-line-output@v2
+        with:
+          command_line: cat target/site/apidocs/index.html
+          contains: javadoc
+    
