@@ -19,10 +19,12 @@ jobs:
     strategy:
       matrix:
         java: [8, 11, 17, 19]
+        java-distribution:
+          [adopt, zulu, temurin, corretto, microsoft, oracle, liberica]
         os: [ubuntu-latest, windows-latest, macos-latest]
     runs-on: ${{ matrix.os }}
 
-    name: Test with Java ${{ matrix.java }} and os ${{ matrix.os }}
+    name: Test Java ${{ matrix.java }} ${{ matrix.java-distribution }} - ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
 
@@ -39,6 +41,7 @@ jobs:
           javadoc-branch: javadoc-test
           java-version: ${{ matrix.java }}
           target-folder: javadoc
+          java-distribution: ${{ matrix.java-distribution }}
           without-deploy: true
           without-checkout: true
 

@@ -4,6 +4,9 @@ branding:
   icon: "book-open"
   color: "white"
 inputs:
+
+  # Required inputs
+
   java-version: # version of java
     description: "Java version inside your project"
     required: true
@@ -22,13 +25,24 @@ inputs:
     required: true
     default: .
     type: string
-  without-deploy: # deploy the javadoc to the javadoc branch, is used for development testing with nektos/act
-    description: "Deploy the javadoc to the javadoc branch"
+
+  # Optional inputs
+
+  java-distribution: # distribution of java
+    description: "Java distribution inside your project"
+    required: false
+    default: "adopt"
+
+
+  # Used for development and testing :
+
+  without-deploy: # deploy the javadoc to the GitHub Page, is used for development testing with nektos/act
+    description: "Enable or disable deploy of the javadoc to the GitHub Page"
     required: false
     default: "false"
     type: boolean
   without-checkout: # checkout the javadoc branch, is used for development testing with nektos/act
-    description: "Checkout the javadoc branch"
+    description: "Enable or disable the checkout"
     required: false
     default: "false"
     type: boolean
@@ -44,7 +58,7 @@ runs:
     - uses: actions/setup-java@v3
       with:
         java-version: ${{ inputs.java-version }}
-        distribution: "adopt"
+        distribution: ${{ inputs.java-distribution }}
 
     - name: Generate Javadoc
       run: mvn org.apache.maven.plugins:maven-javadoc-plugin:3.4.0:aggregate
