@@ -16,6 +16,7 @@ jobs:
   test:
     needs: check-pom
     runs-on: ubuntu-latest
+    continue-on-error: true
     strategy:
       matrix:
         java: [8, 11, 17, 19]
