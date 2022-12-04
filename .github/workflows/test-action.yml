@@ -22,6 +22,15 @@ jobs:
         java-distribution:
           [adopt, zulu, temurin, corretto, microsoft, oracle, liberica]
         os: [ubuntu-latest, windows-latest, macos-latest]
+        exclude:
+          - java: 8
+            java-distribution: microsoft
+          - java: 8
+            java-distribution: oracle
+          - java: 11
+            java-distribution: oracle
+          - java: 19
+            java-distribution: microsoft
     runs-on: ${{ matrix.os }}
 
     name: Test Java ${{ matrix.java }} ${{ matrix.java-distribution }} - ${{ matrix.os }}
