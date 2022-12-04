@@ -3,16 +3,31 @@ name: Test Actions
 on: [pull_request, push]
 
 jobs:
+  check-pom:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: GuillaumeFalourd/assert-command-line-output@v2
+        with:
+          command_line: cat pom.xml
+          contains: JAVAVERSION
+
   test:
+    needs: check-pom
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        java: [ '17' ]
-    
+        java: [11, 17, 19]
+
     name: Test with Java ${{ matrix.java }}
     steps:
-    
       - uses: actions/checkout@v3
+
+      - name: Setup java project
+        run: sed -i 's/JAVAVERSION/${{ matrix.java }}/g' pom.xml
+        shell: bash
+
       - uses: ./ # Uses an action in the root directory
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -20,9 +35,9 @@ jobs:
           java-version: ${{ matrix.java }}
           target-folder: javadoc
           without-deploy: true
+          without-checkout: true
 
       - uses: GuillaumeFalourd/assert-command-line-output@v2
         with:
           command_line: cat target/site/apidocs/index.html
           contains: javadoc
-    
