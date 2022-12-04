@@ -36,6 +36,7 @@ inputs:
 runs:
   using: "composite"
   steps:
+<<<<<<< HEAD
     - uses: actions/checkout@v3
       if: inputs.without-checkout == 'false'
       with:
@@ -59,3 +60,23 @@ runs:
         clean: true
         folder: target/site/apidocs
         target-folder: ${{ inputs.target-folder }}
+=======
+  - uses: actions/checkout@v3
+    with:
+      fetch-depth: 0
+  - uses: actions/setup-java@v3
+    with:
+      java-version: ${{ inputs.java-version }}
+      distribution: 'adopt'
+  - name: Generate Javadoc
+    run: mvn org.apache.maven.plugins:maven-javadoc-plugin:3.4.0:aggregate
+    shell: bash
+  - name: Deploy 🚀
+    uses: JamesIves/github-pages-deploy-action@v4.4.1
+    with:
+      token: ${{ inputs.GITHUB_TOKEN }}
+      branch: ${{ inputs.javadoc-branch }}
+      clean: true
+      folder: target/site/apidocs
+      target-folder: ${{ inputs.target-folder }} 
+>>>>>>> 81e016696c8d855082cc1d6b143c442ebc2f2aed
