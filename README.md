@@ -1,4 +1,7 @@
 # Javadoc-publisher.yml
+[![Public workflows that use this action.](https://img.shields.io/endpoint?url=https%3A%2F%2Fapi-endbug.vercel.app%2Fapi%2Fgithub-actions%2Fused-by%3Faction%3DMathieuSoysal%2FJavadoc-publisher.yml%26badge%3Dtrue)](https://github.com/search?o=desc&q=MathieuSoysal+javadoc-publisher+path%3A.github%2Fworkflows+language%3AYAML&s=&type=code)
+
+
 Automatically generate Javadoc from your maven project and deploy it with GitHub Page on *javadoc* branch.
 
 ## Requirements
