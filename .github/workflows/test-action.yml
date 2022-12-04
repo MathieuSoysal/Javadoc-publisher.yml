@@ -26,9 +26,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Setup java project
-        run: sed -i 's/JAVAVERSION/${{ matrix.java }}/g' pom.xml
-        shell: bash
+      - name: Replace string in file
+        uses: MathieuSoysal/replace-string-in-file@v1.0.0
+        with:
+          file: pom.xml
+          old-string: JAVAVERSION
+          new-string: ${{ matrix.java }}
 
       - uses: ./ # Uses an action in the root directory
         with:
