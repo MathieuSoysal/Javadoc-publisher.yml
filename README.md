@@ -1,5 +1,5 @@
-# Javadoc-publisher.yml
-[![Public workflows that use this action.](https://img.shields.io/endpoint?url=https%3A%2F%2Fapi-endbug.vercel.app%2Fapi%2Fgithub-actions%2Fused-by%3Faction%3DMathieuSoysal%2FJavadoc-publisher.yml%26badge%3Dtrue)](https://github.com/search?o=desc&q=MathieuSoysal+javadoc-publisher+path%3A.github%2Fworkflows+language%3AYAML&s=&type=code) [![Test Actions](https://github.com/MathieuSoysal/Javadoc-publisher.yml/actions/workflows/test-action.yml/badge.svg)](https://github.com/MathieuSoysal/Javadoc-publisher.yml/actions/workflows/test-action.yml)*(Tested on Java 8, 11, 17, 19 Maven, Gradle, Ubuntu, Macos, windows)*
+# Deploy Publish JavaDoc
+[![Public workflows that use this action.](https://img.shields.io/endpoint?url=https%3A%2F%2Fapi-endbug.vercel.app%2Fapi%2Fgithub-actions%2Fused-by%3Faction%3DMathieuSoysal%2Fpublish-javadoc%26badge%3Dtrue)](https://github.com/search?o=desc&q=MathieuSoysal+javadoc-publisher+path%3A.github%2Fworkflows+language%3AYAML&s=&type=code) [![Test Actions](https://github.com/MathieuSoysal/publish-javadoc/actions/workflows/test-action.yml/badge.svg)](https://github.com/MathieuSoysal/publish-javadoc/actions/workflows/test-action.yml)*(Tested on Java 8, 11, 17, 19, Maven, Gradle, Ubuntu, Macos, Windows)*
 
 
 Automatically generate Javadoc from your maven project and deploy it with GitHub Page on *javadoc* branch.
@@ -11,7 +11,7 @@ Automatically generate Javadoc from your maven project and deploy it with GitHub
 
 ### For Maven project
 
-The workflow, usually declared in `.github/workflows/javadoc-publish.yml`, looks like:
+The workflow, usually declared in `.github/workflows/publish-javadoc.yml`, looks like:
 
 <details open>
 
@@ -31,7 +31,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Deploy JavaDoc 🚀
-        uses: MathieuSoysal/Javadoc-publisher.yml@v2.0.4
+        uses: MathieuSoysal/publish-javadoc@v2.0.4
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           javadoc-branch: javadoc
@@ -43,7 +43,7 @@ jobs:
 
 ### For Gradle project
 
-The workflow, usually declared in `.github/workflows/javadoc-publish.yml`, looks like:
+The workflow, usually declared in `.github/workflows/publish-javadoc.yml`, looks like:
 
 <details open>
 <summary>.github/workflows/publish-javadoc-gradle.yml</summary>
@@ -64,7 +64,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Deploy JavaDoc 🚀
-        uses: MathieuSoysal/Javadoc-publisher.yml@v2.0.4
+        uses: MathieuSoysal/publish-javadoc@v2.0.4
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           javadoc-branch: javadoc
@@ -95,7 +95,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Deploy JavaDoc 🚀
-        uses: MathieuSoysal/Javadoc-publisher.yml@v2.0.4
+        uses: MathieuSoysal/publish-javadoc@v2.0.4
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           javadoc-branch: javadoc
@@ -118,4 +118,4 @@ Don't forget to configure your repository settings with your new GitHub Page. �
 In the badge link, replace *YOUR-USERNAME* with your GitHub Username and replace *YOUR-REPO* with the name of your GitHub repository.
 
 ## License
-The Dockerfile and associated scripts and documentation in this project are released under the [Apache 2.0 License](https://github.com/MathieuSoysal/Javadoc-publisher.yml/blob/main/LICENSE).
+The Dockerfile and associated scripts and documentation in this project are released under the [Apache 2.0 License](https://github.com/MathieuSoysal/publish-javadoc/blob/main/LICENSE).

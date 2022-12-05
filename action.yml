@@ -1,5 +1,5 @@
-name: Deploy Javadoc
-description: "Automatically  generate your Javadoc from your maven project and deploy it with GitHub Page on javadoc branch."
+name: Deploy - Publish Javadoc
+description: "Automatically generate your JavaDoc and publish it to GitHub Page."
 branding:
   icon: "book-open"
   color: "white"
