@@ -32,6 +32,9 @@ jobs:
             java-distribution: oracle
           - java: 19
             java-distribution: microsoft
+          - java: 19
+            project: gradle
+            os: windows-latest
     runs-on: ${{ matrix.os }}
 
     name: Test Java ${{ matrix.java }} ${{ matrix.java-distribution }} ${{ matrix.project }} - ${{ matrix.os }}
