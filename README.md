@@ -36,7 +36,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           javadoc-branch: javadoc
           java-version: 17
-          target-folder: javadoc 
+          target-folder: javadoc # url will be https://<username>.github.io/<repo>/javadoc
+          project: maven # or gradle
 ```
 </details>
 
@@ -72,6 +73,38 @@ jobs:
           project: gradle
 ```
 </details>
+
+### With custom command for generating Javadoc
+
+If you want to use a custom command for generating Javadoc, you can use the `custom-command` input. This input is a string that will be executed in the root of your project. For example, if you want to use the `javadoc` command, you can use the following workflow:
+
+<details open>
+<summary>.github/workflows/publish-javadoc-custom-command.yml</summary>
+
+```YAML
+name: Deploy Javadoc
+
+on:
+  push:
+    branches:
+      - master
+      - main
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy JavaDoc 🚀
+        uses: MathieuSoysal/Javadoc-publisher.yml@v2.0.4
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          javadoc-branch: javadoc
+          java-version: 17
+          target-folder: javadoc 
+          project: gradle
+          custom-command: javadoc -d javadoc -sourcepath src/main/java -subpackages .
+```
+
 
 ### GitHub page
 
