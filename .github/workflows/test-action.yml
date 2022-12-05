@@ -1,6 +1,6 @@
 name: Test Actions
 
-on: [pull_request, push]
+on: [push]
 
 jobs:
   check-pom:
@@ -60,7 +60,7 @@ jobs:
           command_line: cat target/site/apidocs/index.html
           contains: javadoc
 
-  test-for-nektos-act:  # Test the action with the Nektos/act tool
+  test-for-nektos-act: # Test the action with the Nektos/act tool
     if: github.actions == false
     needs: check-pom
     runs-on: ubuntu-latest
