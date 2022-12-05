@@ -8,7 +8,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - uses: GuillaumeFalourd/assert-command-line-output@v2
+      - uses: GuillaumeFalourd/assert-command-line-output@v3
         with:
           command_line: cat pom.xml
           contains: JAVAVERSION
@@ -71,13 +71,13 @@ jobs:
           without-checkout: true
           custom-command: gradle javadoc
 
-      - uses: GuillaumeFalourd/assert-command-line-output@v2
+      - uses: GuillaumeFalourd/assert-command-line-output@v3
         if: ${{ matrix.project == 'maven' }}
         with:
           command_line: cat target/site/apidocs/index.html
           contains: javadoc
 
-      - uses: GuillaumeFalourd/assert-command-line-output@v2
+      - uses: GuillaumeFalourd/assert-command-line-output@v3
         if: ${{ matrix.project == 'gradle' }}
         with:
           command_line: cat build/docs/javadoc/index.html
