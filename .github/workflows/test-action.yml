@@ -18,10 +18,9 @@ jobs:
     continue-on-error: true
     strategy:
       matrix:
-        java: [8, 11, 17, 19]
-        java-distribution:
-          [adopt, zulu, temurin, corretto, microsoft, oracle, liberica]
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        java: [8]
+        java-distribution: [adopt]
+        os: [ubuntu-latest]
         project: [maven, gradle]
         exclude:
           - java: 8
@@ -49,6 +48,7 @@ jobs:
           new-string: ${{ matrix.java }}
 
       - uses: ./ # Uses an action in the root directory
+        if: ${{ matrix.project == 'maven' }}
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           javadoc-branch: javadoc-test
@@ -58,6 +58,20 @@ jobs:
           java-distribution: ${{ matrix.java-distribution }}
           without-deploy: true
           without-checkout: true
+          custom-command: mvn javadoc:javadoc
+
+      - uses: ./ # Uses an action in the root directory
+        if: ${{ matrix.project == 'gradle' }}
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          javadoc-branch: javadoc-test
+          java-version: ${{ matrix.java }}
+          target-folder: javadoc
+          project: ${{ matrix.project }}
+          java-distribution: ${{ matrix.java-distribution }}
+          without-deploy: true
+          without-checkout: true
+          custom-command: gradle javadoc
 
       - uses: GuillaumeFalourd/assert-command-line-output@v2
         if: ${{ matrix.project == 'maven' }}
