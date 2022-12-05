@@ -1,6 +1,6 @@
 name: Test Actions
 
-on: [pull_request, push]
+on: [push]
 
 jobs:
   check-pom:
@@ -13,7 +13,8 @@ jobs:
           command_line: cat pom.xml
           contains: JAVAVERSION
 
-  test:
+  test-for-github-workflow: # Test the action with the GitHub workflow
+    if: github.actions == true
     needs: check-pom
     continue-on-error: true
     strategy:
@@ -51,6 +52,36 @@ jobs:
           java-version: ${{ matrix.java }}
           target-folder: javadoc
           java-distribution: ${{ matrix.java-distribution }}
+          without-deploy: true
+          without-checkout: true
+
+      - uses: GuillaumeFalourd/assert-command-line-output@v2
+        with:
+          command_line: cat target/site/apidocs/index.html
+          contains: javadoc
+
+  test-for-nektos-act: # Test the action with the Nektos/act tool
+    if: github.actions == false
+    needs: check-pom
+    runs-on: ubuntu-latest
+    name: Test Java 17 - ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Replace string in file
+        uses: MathieuSoysal/replace-string-in-file@v1.0.0
+        with:
+          file: pom.xml
+          old-string: JAVAVERSION
+          new-string: 17
+
+      - uses: ./ # Uses an action in the root directory
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          javadoc-branch: javadoc-test
+          java-version: 17
+          target-folder: javadoc
+          java-distribution: adopt
           without-deploy: true
           without-checkout: true
 

@@ -61,7 +61,7 @@ runs:
         distribution: ${{ inputs.java-distribution }}
 
     - name: Generate Javadoc
-      run: mvn org.apache.maven.plugins:maven-javadoc-plugin:3.4.0:aggregate
+      run: mvn javadoc:javadoc
       shell: bash
 
     - name: Deploy 🚀
