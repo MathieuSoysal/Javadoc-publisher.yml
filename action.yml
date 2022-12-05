@@ -39,11 +39,11 @@ inputs:
     options:
       - maven
       - gradle
-    custom-command:
-      description: "Custom command to generate the javadoc"
-      required: false
-      default: ""
-      type: string
+  custom-command:
+    description: "Custom command to generate the javadoc"
+    required: false
+    default: ""
+    type: string
 
   # Development and testing inputs
   without-deploy: # deploy the javadoc to the GitHub Page, is used for development testing with nektos/act
