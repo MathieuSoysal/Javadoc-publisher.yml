@@ -1,5 +1,5 @@
-name: Deploy Javadoc
-description: "Automatically  generate your Javadoc from your maven project and deploy it with GitHub Page on javadoc branch."
+name: Deploy - Publish Javadoc
+description: "Automatically generate your JavaDoc and publish it to GitHub Page."
 branding:
   icon: "book-open"
   color: "white"
@@ -39,6 +39,11 @@ inputs:
     options:
       - maven
       - gradle
+  custom-command:
+    description: "Custom command to generate the javadoc"
+    required: false
+    default: ""
+    type: string
 
   # Development and testing inputs
   without-deploy: # deploy the javadoc to the GitHub Page, is used for development testing with nektos/act
@@ -67,13 +72,18 @@ runs:
         cache: ${{ inputs.project }}
 
     - name: Generate Javadoc with Maven
-      if: inputs.project == 'maven'
+      if: inputs.project == 'maven' && inputs.custom-command == ''
       run: mvn javadoc:javadoc
       shell: bash
 
     - name: Generate Javadoc with Gradle
-      if: inputs.project == 'gradle'
+      if: inputs.project == 'gradle' && inputs.custom-command == ''
       run: gradle javadoc
+      shell: bash
+    
+    - name: Generate Javadoc with custom command
+      if: inputs.custom-command != ''
+      run: ${{ inputs.custom-command }}
       shell: bash
 
     - name: Deploy to GitHub Page 🚀 with Maven
