@@ -14,7 +14,6 @@ jobs:
           contains: JAVAVERSION
 
   test-for-github-workflow: # Test the action with the GitHub workflow
-    if: github.actions == true
     needs: check-pom
     continue-on-error: true
     strategy:
@@ -23,6 +22,7 @@ jobs:
         java-distribution:
           [adopt, zulu, temurin, corretto, microsoft, oracle, liberica]
         os: [ubuntu-latest, windows-latest, macos-latest]
+        project: [maven, gradle]
         exclude:
           - java: 8
             java-distribution: microsoft
@@ -32,9 +32,12 @@ jobs:
             java-distribution: oracle
           - java: 19
             java-distribution: microsoft
+          - java: 19
+            project: gradle
+            os: windows-latest
     runs-on: ${{ matrix.os }}
 
-    name: Test Java ${{ matrix.java }} ${{ matrix.java-distribution }} - ${{ matrix.os }}
+    name: Test Java ${{ matrix.java }} ${{ matrix.java-distribution }} ${{ matrix.project }} - ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
 
@@ -51,41 +54,19 @@ jobs:
           javadoc-branch: javadoc-test
           java-version: ${{ matrix.java }}
           target-folder: javadoc
+          project: ${{ matrix.project }}
           java-distribution: ${{ matrix.java-distribution }}
           without-deploy: true
           without-checkout: true
 
       - uses: GuillaumeFalourd/assert-command-line-output@v2
+        if: ${{ matrix.project == 'maven' }}
         with:
           command_line: cat target/site/apidocs/index.html
           contains: javadoc
 
-  test-for-nektos-act: # Test the action with the Nektos/act tool
-    if: github.actions == false
-    needs: check-pom
-    runs-on: ubuntu-latest
-    name: Test Java 17 - ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Replace string in file
-        uses: MathieuSoysal/replace-string-in-file@v1.0.0
-        with:
-          file: pom.xml
-          old-string: JAVAVERSION
-          new-string: 17
-
-      - uses: ./ # Uses an action in the root directory
-        with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          javadoc-branch: javadoc-test
-          java-version: 17
-          target-folder: javadoc
-          java-distribution: adopt
-          without-deploy: true
-          without-checkout: true
-
       - uses: GuillaumeFalourd/assert-command-line-output@v2
+        if: ${{ matrix.project == 'gradle' }}
         with:
-          command_line: cat target/site/apidocs/index.html
+          command_line: cat build/docs/javadoc/index.html
           contains: javadoc
