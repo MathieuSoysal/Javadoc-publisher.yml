@@ -78,7 +78,7 @@ runs:
 
     - name: Deploy to GitHub Page 🚀 with Maven
       if: ${{ inputs.without-deploy == 'false' && inputs.project == 'maven' }}
-      uses: JamesIves/github-pages-deploy-action@v4.4.0
+      uses: JamesIves/github-pages-deploy-action@v4.4.1
       with:
         token: ${{ inputs.GITHUB_TOKEN }}
         branch: ${{ inputs.javadoc-branch }}
@@ -88,7 +88,7 @@ runs:
 
     - name: Deploy to GitHub Page 🚀 with Gradle
       if: ${{ inputs.without-deploy == 'false' && inputs.project == 'gradle' }}
-      uses: JamesIves/github-pages-deploy-action@v4.4.0
+      uses: JamesIves/github-pages-deploy-action@v4.4.1
       with:
         token: ${{ inputs.GITHUB_TOKEN }}
         branch: ${{ inputs.javadoc-branch }}
