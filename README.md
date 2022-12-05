@@ -9,7 +9,14 @@ Automatically generate Javadoc from your maven project and deploy it with GitHub
 
 ## Usage
 
+### For Maven project
+
 The workflow, usually declared in `.github/workflows/javadoc-publish.yml`, looks like:
+
+<details open>
+
+<summary>.github/workflows/publish-javadoc-maven.yml</summary>
+
 ```YAML
 name: Deploy Javadoc
 
@@ -31,6 +38,40 @@ jobs:
           java-version: 17
           target-folder: javadoc 
 ```
+</details>
+
+### For Gradle project
+
+The workflow, usually declared in `.github/workflows/javadoc-publish.yml`, looks like:
+
+<details open>
+<summary>.github/workflows/publish-javadoc-gradle.yml</summary>
+
+
+
+```YAML
+name: Deploy Javadoc
+
+on:
+  push:
+    branches:
+      - master
+      - main
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy JavaDoc 🚀
+        uses: MathieuSoysal/Javadoc-publisher.yml@v2.0.4
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          javadoc-branch: javadoc
+          java-version: 17
+          target-folder: javadoc 
+          project: gradle
+```
+</details>
 
 ### GitHub page
 
