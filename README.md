@@ -104,7 +104,7 @@ jobs:
           project: gradle
           custom-command: javadoc -d javadoc -sourcepath src/main/java -subpackages .
 ```
-
+</details>
 
 ### GitHub page
 
