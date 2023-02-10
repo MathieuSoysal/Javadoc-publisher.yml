@@ -1,6 +1,11 @@
 name: Test Actions
 
-on: [push]
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  pull_request:
+    branches:
+      - main
 
 jobs:
   check-pom:
@@ -56,6 +61,7 @@ jobs:
           java-distribution: ${{ matrix.java-distribution }}
           without-deploy: true
           without-checkout: true
+          custom-command: mvn javadoc:javadoc
 
       - uses: ./ # Uses an action in the root directory
         if: ${{ matrix.project == 'gradle' }}
