@@ -14,9 +14,6 @@
     <name>template</name>
     <!-- FIXME replace www.example.com-->
     <url>http://www.example.com</url>
-    <modules>
-        <module>moduleA</module>
-    </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>JAVAVERSION</java.version>

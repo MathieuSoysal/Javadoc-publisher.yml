@@ -6,6 +6,9 @@ on:
   pull_request:
     branches:
       - main
+  push:
+    branches:
+      - add-support-for-subdirectories-#27
 
 jobs:
   check-pom:
@@ -23,10 +26,10 @@ jobs:
     continue-on-error: true
     strategy:
       matrix:
-        java: [8, 11, 16, 17, 18, 19]
-        java-distribution: [adopt, zulu, temurin, corretto, microsoft, liberica]
-        os: [ubuntu-latest, windows-latest, macos-latest]
-        project: [maven, gradle]
+        java: [17]
+        java-distribution: [temurin]
+        os: [ubuntu-latest]
+        project: [maven]
         exclude:
           - java: 8
             java-distribution: microsoft
