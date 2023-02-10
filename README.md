@@ -31,7 +31,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Deploy JavaDoc 🚀
-        uses: MathieuSoysal/Javadoc-publisher.yml@v2.3.0
+        uses: MathieuSoysal/Javadoc-publisher.yml@v2.3.2
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           javadoc-branch: javadoc
@@ -64,7 +64,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Deploy JavaDoc 🚀
-        uses: MathieuSoysal/Javadoc-publisher.yml@v2.3.0
+        uses: MathieuSoysal/Javadoc-publisher.yml@v2.3.2
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           javadoc-branch: javadoc
@@ -95,7 +95,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Deploy JavaDoc 🚀
-        uses: MathieuSoysal/Javadoc-publisher.yml@v2.3.0
+        uses: MathieuSoysal/Javadoc-publisher.yml@v2.3.2
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           javadoc-branch: javadoc
@@ -116,6 +116,26 @@ Don't forget to configure your repository settings with your new GitHub Page. �
 [![Javadoc](https://img.shields.io/badge/JavaDoc-Online-green)](https://YOUR-USERNAME.github.io/YOUR-REPO/javadoc/)
 ```
 In the badge link, replace *YOUR-USERNAME* with your GitHub Username and replace *YOUR-REPO* with the name of your GitHub repository.
+
+## Contributing
+
+Want to contribute to act? Awesome! Check out [the contributing guidelines]() to get involved.
+
+### Requirements to your environment to test in locally
+
+- Install [nektos/act](https://github.com/nektos/act) & clone the repo `git clone git@github.com:MathieuSoysal/Javadoc-publisher.yml.git`  
+OR
+- Use the devcontainer of the repo: with [GitHub Codespaces](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=441722764)
+
+### Command to test your changes
+
+```bash
+act workflow_dispatch -W .github/workflows/test-action-local.yml -P ubuntu-latest=quay.io/jamezp/act-maven
+```
+
+### Stars 🎇
+
+If you like or use this project, please don't forget to give it a star ⭐️. Thanks!
 
 ## License
 The Dockerfile and associated scripts and documentation in this project are released under the [Apache 2.0 License](https://github.com/MathieuSoysal/publish-javadoc/blob/main/LICENSE).
