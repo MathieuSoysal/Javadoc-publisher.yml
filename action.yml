@@ -47,8 +47,7 @@ inputs:
   subdirectories:
     description: "Custom subdirectories to upload from"
     required: false
-    default: []
-    type: string[]
+    type: array
 
   # Development and testing inputs
   without-deploy: # deploy the javadoc to the GitHub Page, is used for development testing with nektos/act
@@ -92,6 +91,15 @@ runs:
       run: ${{ inputs.custom-command }}
       shell: bash
 
+    - name: Handle subdirectories for GitHub Pages
+      if: ${{ inputs.subdirectories != '' }}
+      run: |
+        if [ ! -d target/site/apidocs ]; then
+          mkdir -p target/site/apidocs
+        fi
+        cp -r ${{ inputs.subdirectories }} target/site/apidocs
+      shell: bash
+
     - name: Deploy to GitHub Page 🚀 with Maven
       if: ${{ inputs.without-deploy == 'false' && inputs.project == 'maven' }}
       uses: JamesIves/github-pages-deploy-action@v4.4.1
@@ -101,20 +109,6 @@ runs:
         clean: true
         folder: target/site/apidocs
         target-folder: ${{ inputs.target-folder }}
-
-    - name: Deploy to GitHub Page 🚀 with Maven - subdirectories
-      if: ${{ inputs.without-deploy == 'false' && inputs.project == 'maven' && inputs.subdirectories != [] }}
-      uses: JamesIves/github-pages-deploy-action@v4.4.1
-      set_fact:
-        subdirectories: "{{ inputs.subdirectories | default({}) |combine(item) }}"
-        loop: "{{ subdirectories.stdout | from_yaml_all | list }}"
-      with_items: "{{ subdirectories.inputs.subdirectories }}"
-      with:
-        token: ${{ inputs.GITHUB_TOKEN }}
-        branch: ${{ inputs.javadoc-branch }}
-        clean: false
-        folder: ${{item}}/target/site/apidocs
-        target-folder: ${{ inputs.target-folder }}/${{ item }}
 
     - name: Deploy to GitHub Page 🚀 with Gradle
       if: ${{ inputs.without-deploy == 'false' && inputs.project == 'gradle' }}

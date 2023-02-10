@@ -56,6 +56,7 @@ jobs:
           java-distribution: ${{ matrix.java-distribution }}
           without-deploy: true
           without-checkout: true
+          # subdirectories: src/main/java src/test/java
 
       - uses: GuillaumeFalourd/assert-command-line-output@v2
         if: ${{ matrix.project == 'maven' }}
