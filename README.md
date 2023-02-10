@@ -1,5 +1,5 @@
 # Deploy Publish JavaDoc
-[![Public workflows that use this action.](https://img.shields.io/endpoint?url=https%3A%2F%2Fapi-endbug.vercel.app%2Fapi%2Fgithub-actions%2Fused-by%3Faction%3DMathieuSoysal%2FJavadoc-publisher%26badge%3Dtrue)](https://github.com/search?o=desc&q=MathieuSoysal+javadoc-publisher+path%3A.github%2Fworkflows+language%3AYAML&s=&type=code) [![Test Actions](https://github.com/MathieuSoysal/publish-javadoc/actions/workflows/test-action.yml/badge.svg)](https://github.com/MathieuSoysal/publish-javadoc/actions/workflows/test-action.yml)*(Tested on Java 8, 11, 17, 19, Maven, Gradle, Ubuntu, Macos, Windows)*
+[![Public workflows that use this action.](https://img.shields.io/endpoint?url=https%3A%2F%2Fapi-endbug.vercel.app%2Fapi%2Fgithub-actions%2Fused-by%3Faction%3DMathieuSoysal%2FJavadoc-publisher%26badge%3Dtrue)](https://github.com/search?o=desc&q=MathieuSoysal+javadoc-publisher+path%3A.github%2Fworkflows+language%3AYAML&s=&type=code) [![Test Actions](https://github.com/MathieuSoysal/publish-javadoc/actions/workflows/test-action-final.yml/badge.svg)](https://github.com/MathieuSoysal/publish-javadoc/actions/workflows/test-action-final.yml)*(Tested on Java 8, 11, 17, 19, Maven, Gradle, Ubuntu, Macos, Windows)*
 
 
 Automatically generate Javadoc from your Java project and publish it to GitHub Page.
