@@ -119,7 +119,7 @@ In the badge link, replace *YOUR-USERNAME* with your GitHub Username and replace
 
 ## Contributing
 
-Want to contribute to act? Awesome! Check out [the contributing guidelines](CONTRIBUTING.md) to get involved.
+Want to contribute to Javadoc Publisher? Awesome! Check out [the contributing guidelines](CONTRIBUTING.md) to get involved.
 
 ### Requirements to your environment to test in locally
 
