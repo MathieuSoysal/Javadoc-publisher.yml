@@ -1,11 +1,6 @@
-name: Test Actions
+name: Test Actions locally
 
-on:
-  schedule:
-    - cron: '0 0 * * *'
-  pull_request:
-    branches:
-      - main
+on: [workflow_dispatch]
 
 jobs:
   check-pom:
@@ -23,10 +18,10 @@ jobs:
     continue-on-error: true
     strategy:
       matrix:
-        java: [8, 11, 16, 17, 18, 19]
-        java-distribution: [adopt, zulu, temurin, corretto, microsoft, liberica]
-        os: [ubuntu-latest, windows-latest, macos-latest]
-        project: [maven, gradle]
+        java: [16]
+        java-distribution: [adopt]
+        os: [ubuntu-latest]
+        project: [maven]
         exclude:
           - java: 8
             java-distribution: microsoft
@@ -61,29 +56,9 @@ jobs:
           java-distribution: ${{ matrix.java-distribution }}
           without-deploy: true
           without-checkout: true
-          custom-command: mvn javadoc:javadoc
-
-      - uses: ./ # Uses an action in the root directory
-        if: ${{ matrix.project == 'gradle' }}
-        with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          javadoc-branch: javadoc-test
-          java-version: ${{ matrix.java }}
-          target-folder: javadoc
-          project: ${{ matrix.project }}
-          java-distribution: ${{ matrix.java-distribution }}
-          without-deploy: true
-          without-checkout: true
-          custom-command: gradle javadoc
 
       - uses: GuillaumeFalourd/assert-command-line-output@v2
         if: ${{ matrix.project == 'maven' }}
         with:
           command_line: cat target/site/apidocs/index.html
-          contains: javadoc
-
-      - uses: GuillaumeFalourd/assert-command-line-output@v2
-        if: ${{ matrix.project == 'gradle' }}
-        with:
-          command_line: cat build/docs/javadoc/index.html
           contains: javadoc
