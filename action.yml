@@ -48,7 +48,7 @@ inputs:
     description: "Custom subdirectories to upload from"
     required: false
     default: ""
-    type: array(string)
+    type: string
 
   # Development and testing inputs
   without-deploy: # deploy the javadoc to the GitHub Page, is used for development testing with nektos/act
@@ -105,10 +105,6 @@ runs:
     - name: Deploy to GitHub Page 🚀 with Maven - subdirectories
       if: ${{ inputs.without-deploy == 'false' && inputs.project == 'maven' && inputs.subdirectories != '' }}
       uses: JamesIves/github-pages-deploy-action@v4.4.1
-      set_fact:
-        subdirectories: "{{ inputs.subdirectories | default({}) |combine(item) }}"
-        loop: "{{ subdirectories.stdout | from_yaml_all | list }}"
-      with_items: "{{ subdirectories.inputs.subdirectories }}"
       with:
         token: ${{ inputs.GITHUB_TOKEN }}
         branch: ${{ inputs.javadoc-branch }}

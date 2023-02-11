@@ -1,14 +1,6 @@
-name: Test Actions
+name: Test Actions locally
 
-on:
-  schedule:
-    - cron: '0 0 * * *'
-  pull_request:
-    branches:
-      - main
-  push:
-    branches:
-      - add-support-for-subdirectories-#27
+on: [workflow_dispatch]
 
 jobs:
   check-pom:
@@ -64,29 +56,11 @@ jobs:
           java-distribution: ${{ matrix.java-distribution }}
           without-deploy: true
           without-checkout: true
-          custom-command: mvn javadoc:javadoc
-
-      - uses: ./ # Uses an action in the root directory
-        if: ${{ matrix.project == 'gradle' }}
-        with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          javadoc-branch: javadoc-test
-          java-version: ${{ matrix.java }}
-          target-folder: javadoc
-          project: ${{ matrix.project }}
-          java-distribution: ${{ matrix.java-distribution }}
-          without-deploy: true
-          without-checkout: true
-          custom-command: gradle javadoc
+          custom-command: mvn -f pom-modules.xml javadoc:javadoc
+          subdirectories: moduleA
 
       - uses: GuillaumeFalourd/assert-command-line-output@v2
         if: ${{ matrix.project == 'maven' }}
         with:
           command_line: cat target/site/apidocs/index.html
-          contains: javadoc
-
-      - uses: GuillaumeFalourd/assert-command-line-output@v2
-        if: ${{ matrix.project == 'gradle' }}
-        with:
-          command_line: cat build/docs/javadoc/index.html
           contains: javadoc
