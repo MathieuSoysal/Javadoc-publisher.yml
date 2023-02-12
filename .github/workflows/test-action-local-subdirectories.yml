@@ -1,4 +1,4 @@
-name: Test Actions locally
+name: Test Actions for subdirectories
 
 on: [workflow_dispatch, pull_request, push]
 
