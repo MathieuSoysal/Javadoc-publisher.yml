@@ -31,7 +31,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Deploy JavaDoc 🚀
-        uses: MathieuSoysal/Javadoc-publisher.yml@v2.3.2
+        uses: MathieuSoysal/Javadoc-publisher.yml@v2.4.0
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           javadoc-branch: javadoc
@@ -65,7 +65,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Deploy JavaDoc 🚀
-        uses: MathieuSoysal/Javadoc-publisher.yml@v2.3.2
+        uses: MathieuSoysal/Javadoc-publisher.yml@v2.4.0
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           javadoc-branch: javadoc
@@ -96,7 +96,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Deploy JavaDoc 🚀
-        uses: MathieuSoysal/Javadoc-publisher.yml@v2.3.2
+        uses: MathieuSoysal/Javadoc-publisher.yml@v2.4.0
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           javadoc-branch: javadoc
