@@ -5,18 +5,18 @@
     <!-- FIXME replace pseudo-->
     <groupId>io.github.pseudo</groupId>
     <!-- FIXME replace name -->
-    <artifactId>template</artifactId>
+    <artifactId>template-moduleB</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
 
     <!-- FIXME replace template-->
-    <name>template</name>
+    <name>template-moduleB</name>
     <!-- FIXME replace www.example.com-->
     <url>http://www.example.com</url>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>JAVAVERSION</java.version>
+        <java.version>17</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
     </properties>
