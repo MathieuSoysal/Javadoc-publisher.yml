@@ -1,6 +1,6 @@
-name: Test Actions locally
+name: Test Actions for subdirectories
 
-on: [workflow_dispatch]
+on: [workflow_dispatch, pull_request, push]
 
 jobs:
   check-pom:
@@ -10,7 +10,7 @@ jobs:
 
       - uses: GuillaumeFalourd/assert-command-line-output@v2
         with:
-          command_line: cat pom.xml
+          command_line: cat pom-module.xml
           contains: JAVAVERSION
 
   test-for-github-workflow: # Test the action with the GitHub workflow
@@ -41,7 +41,7 @@ jobs:
       - name: Replace string in file
         uses: MathieuSoysal/replace-string-in-file@v1.0.0
         with:
-          file: pom.xml
+          file: pom-module.xml
           old-string: JAVAVERSION
           new-string: ${{ matrix.java }}
 
@@ -56,9 +56,11 @@ jobs:
           java-distribution: ${{ matrix.java-distribution }}
           without-deploy: true
           without-checkout: true
+          custom-command: mvn -f pom-module.xml javadoc:javadoc
+          subdirectories: moduleA moduleB
 
       - uses: GuillaumeFalourd/assert-command-line-output@v2
         if: ${{ matrix.project == 'maven' }}
         with:
-          command_line: cat target/site/apidocs/index.html
+          command_line: cat target/site/apidocs/moduleA/apidocs/index.html
           contains: javadoc

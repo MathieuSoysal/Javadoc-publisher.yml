@@ -7,8 +7,11 @@
     <!-- FIXME replace name -->
     <artifactId>template</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
-
+    <packaging>pom</packaging>
+    <modules>
+        <module>moduleA</module>
+        <module>moduleB</module>
+    </modules>
 
     <!-- FIXME replace template-->
     <name>template</name>
