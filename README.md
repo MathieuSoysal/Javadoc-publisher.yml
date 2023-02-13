@@ -38,7 +38,7 @@ jobs:
           java-version: 17
           target-folder: javadoc # url will be https://<username>.github.io/<repo>/javadoc
           project: maven # or gradle
-          subdirectories: moduleA moduleB #for subdirectories support, needs to be run with custom command
+          # subdirectories: moduleA moduleB #for subdirectories support, needs to be run with custom command
 ```
 </details>
 
