@@ -14,3 +14,11 @@ jobs:
         with:
           GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
           svgPath: CONTRIBUTORS.svg
+          userNameHeight: 19
+          itemTemplate: >
+            <g transform="translate({{ x }}, {{ y }})">
+              <a xlink:href="{{{ url }}}" class="contributor-link" target="_blank" rel="nofollow sponsored" title="{{{ name }}}" id="{{{ name }}}">
+                <image width="{{ width }}" height="{{ height }}" xlink:href="{{{ avatar }}}" />
+                <text x="32" y="74" text-anchor="middle" alignment-baseline="middle" font-size="10">{{{ name }}}</text>
+              </a>
+            </g>
