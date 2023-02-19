@@ -29,3 +29,9 @@ jobs:
         
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4
+          token: ${{ secrets.GITHUB_TOKEN }} # You need to create your own token with pull request rights
+          commit-message: Update Contributors
+          title: Update contributors on the readme
+          body: Update readme to reflect contributors changes
+          branch: update-readme
+          base: main
