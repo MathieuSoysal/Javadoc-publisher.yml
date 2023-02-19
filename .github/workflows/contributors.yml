@@ -10,6 +10,9 @@ jobs:
   contributors:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
+      
+      # Changes for the PR
       - uses: wow-actions/contributors-list@v1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -22,3 +25,7 @@ jobs:
                 <text x="32" y="74" text-anchor="middle" alignment-baseline="middle" font-size="10">{{{ name }}}</text>
               </a>
             </g>
+          noCommit: true
+        
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4
