@@ -36,7 +36,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           javadoc-branch: javadoc
           java-version: 17
-          target-folder: javadoc # url will be https://<username>.github.io/<repo>/javadoc
+          target-folder: javadoc # url will be https://<username>.github.io/<repo>/javadoc, This can be left as nothing to generate javadocs in the root folder.
           project: maven # or gradle
           # subdirectories: moduleA moduleB #for subdirectories support, needs to be run with custom command
 ```
