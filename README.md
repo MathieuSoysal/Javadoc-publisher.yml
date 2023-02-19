@@ -134,11 +134,11 @@ OR
 act workflow_dispatch -W .github/workflows/test-action-local.yml -P ubuntu-latest=quay.io/jamezp/act-maven
 ```
 
-### Contributors
+## Contributors
 <img src="CONTRIBUTORS.svg"/>
 
 
-### Stars 🎇
+## Stars 🎇
 
 If you like or use this project, please don't forget to give it a star ⭐️. Thanks!
 
