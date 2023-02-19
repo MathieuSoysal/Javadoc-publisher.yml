@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: wow-actions/contributors-list@v1
         with:
-          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           svgPath: CONTRIBUTORS.svg
           userNameHeight: 19
           itemTemplate: >
