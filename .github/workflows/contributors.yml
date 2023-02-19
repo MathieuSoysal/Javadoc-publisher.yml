@@ -16,7 +16,7 @@ jobs:
       - uses: wow-actions/contributors-list@v1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          svgPath: CONTRIBUTORS.svg # This shouldn't need a path, it's a file..
+          svgPath: CONTRIBUTORS.svg
           userNameHeight: 19
           itemTemplate: >
             <g transform="translate({{ x }}, {{ y }})">
