@@ -21,7 +21,7 @@ Automatically generate Javadoc from your Java project and publish it to GitHub P
 | project           | Maven or Gradle project                                    | maven            |
 | custom-command    | Custom command to generate the javadoc                     | ""               |
 | subdirectories    | Custom subdirectories to upload from                       |                  |
-| without-deploy    | Enable or disable deploy of the javadoc to the GitHub Page | false            |
+| without-deploy    | Enable or disable deploy of the javadoc  to the GitHub Page | false            |
 | without-checkout  | Enable or disable the checkout                             | false            |
 </details>
 
