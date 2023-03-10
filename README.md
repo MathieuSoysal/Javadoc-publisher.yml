@@ -11,7 +11,7 @@ Automatically generate Javadoc from your Java project and publish it to GitHub P
 ## Inputs
 </summary>
 
-|     input         |               description                                  |      default     |
+                                                      
 |-------------------|------------------------------------------------------------|------------------|
 | java-version      | java version inside your project                           | 17               |
 | GITHUB_TOKEN      | The GitHub token the GitHub repository                     |                  |
