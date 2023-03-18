@@ -8,7 +8,7 @@ Automatically generate Javadoc from your Java project and publish it to GitHub P
 - Your project need to use **Maven** or **Gradle**.
 <details>
 <summary>
-## Inputs
+<h2>Inputs</h2>
 </summary>
 
 |                   |                                                            |                  |
