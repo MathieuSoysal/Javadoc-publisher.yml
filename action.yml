@@ -108,7 +108,7 @@ runs:
           mkdir -p ${{ inputs.javadoc-source-folder }}/$dir
           cp -r $dir/${{ inputs.javadoc-source-folder }} ${{ inputs.javadoc-source-folder }}/$dir
         done
-        ls -R inputs.javadoc-source-folder
+        ls -R ${{ inputs.javadoc-source-folder }}
       shell: bash
 
     - name: Deploy to GitHub Page 🚀 with Maven
