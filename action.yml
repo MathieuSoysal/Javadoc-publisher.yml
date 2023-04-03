@@ -119,7 +119,7 @@ runs:
         token: ${{ inputs.GITHUB_TOKEN }}
         branch: ${{ inputs.javadoc-branch }}
         clean: true
-        folder: target/site/apidocs
+        folder: ${{ inputs.javadoc-source-folder }}
         target-folder: ${{ inputs.target-folder }}
 
     - name: Deploy to GitHub Page 🚀 with Gradle
