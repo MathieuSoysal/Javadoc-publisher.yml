@@ -51,6 +51,7 @@ inputs:
   javadoc-source-folder:
     description: "Custom path for the new Javadoc"
     required: false
+    default: target/site/apidocs
     type: string
 
   # Development and testing inputs
