@@ -129,6 +129,12 @@ jobs:
 
 Don't forget to configure your repository settings with your new GitHub Page. 😉
 
+If you need to use the specified directory to store the javadoc, You need to do this on your Settings page. like this.
+
+![github-page](https://user-images.githubusercontent.com/43273304/229786654-6d74104b-7e95-4cee-9888-7c5f686b95ab.png)
+
+Not only that, but if you have README.md file in your javadoc branch, the access will show up just as well. and Doing so does not affect the javadoc commit.
+
 ### Badge
 
 ```Markdown
