@@ -15,7 +15,7 @@ jobs:
           prefix: "Javadoc-publisher.yml@" # Prefix before the version, default is: ""
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v4
+        uses: peter-evans/create-pull-request@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }} # You need to create your own token with pull request rights
           commit-message: update readme
