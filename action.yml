@@ -122,6 +122,17 @@ runs:
         folder: ${{ inputs.javadoc-source-folder }}
         target-folder: ${{ inputs.target-folder }}
 
+    - name: Set Javadoc source folder for Gradle
+      id: set-javadoc-source-folder
+      if: ${{ inputs.project == 'gradle' }}
+      run: |
+        if [ ${{ inputs.javadoc-source-folder }} == "target/site/apidocs" ]; then
+          echo "javadoc-source-folder=build/docs/javadoc" >> "$GITHUB_OUTPUT"
+        else
+          echo "javadoc-source-folder=${{ inputs.javadoc-source-folder }}" >> "$GITHUB_OUTPUT"
+        fi 
+      shell: bash
+
     - name: Deploy to GitHub Page 🚀 with Gradle
       if: ${{ inputs.without-deploy == 'false' && inputs.project == 'gradle' }}
       uses: JamesIves/github-pages-deploy-action@v4.4.1
@@ -129,5 +140,5 @@ runs:
         token: ${{ inputs.GITHUB_TOKEN }}
         branch: ${{ inputs.javadoc-branch }}
         clean: true
-        folder: build/docs/javadoc
+        folder: ${{ steps.set-javadoc-source-folder.outputs.javadoc-source-folder }}
         target-folder: ${{ inputs.target-folder }}
