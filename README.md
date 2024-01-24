@@ -85,8 +85,8 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
-    #permissions:
-    #  contents: write  # if you have a protection rule on your repository, you'll need to give write permission to the workflow.
+    permissions:
+      contents: write  # if you have a protection rule on your repository, you'll need to give write permission to the workflow.
     steps:
       - name: Deploy JavaDoc 🚀
         uses: MathieuSoysal/Javadoc-publisher.yml@v2.4.0
@@ -118,8 +118,8 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
-    #permissions:
-    #  contents: write  # if you have a protection rule on your repository, you'll need to give write permission to the workflow.
+    permissions:
+      contents: write  # if you have a protection rule on your repository, you'll need to give write permission to the workflow.
     steps:
       - name: Deploy JavaDoc 🚀
         uses: MathieuSoysal/Javadoc-publisher.yml@v2.4.0
