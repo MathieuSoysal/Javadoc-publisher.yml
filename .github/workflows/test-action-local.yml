@@ -6,7 +6,7 @@ jobs:
   check-pom:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - uses: GuillaumeFalourd/assert-command-line-output@v2
         with:
@@ -36,7 +36,7 @@ jobs:
 
     name: Test Java ${{ matrix.java }} ${{ matrix.java-distribution }} ${{ matrix.project }} - ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Replace string in file
         uses: MathieuSoysal/replace-string-in-file@v1.0.0
