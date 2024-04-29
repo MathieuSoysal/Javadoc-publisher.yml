@@ -30,11 +30,12 @@ jobs:
         project: [maven, gradle]
         exclude:
           - java: 8
-            java-distribution: [ temurin, adopt ]
+            java-distribution: temurin
             os: macos-latest
           - java: 8
-            java-distribution: microsoft
-          - java: 18
+            java-distribution: adopt
+            os: macos-latest
+          - java: 8
             java-distribution: microsoft
           - java: 19
             java-distribution: microsoft
