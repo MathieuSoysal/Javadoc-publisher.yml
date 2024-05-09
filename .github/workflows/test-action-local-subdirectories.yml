@@ -8,7 +8,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: GuillaumeFalourd/assert-command-line-output@v2
+      - uses: GuillaumeFalourd/assert-command-line-output@v2.3
         with:
           command_line: cat pom-module.xml
           contains: JAVAVERSION
@@ -59,7 +59,7 @@ jobs:
           custom-command: mvn -f pom-module.xml javadoc:javadoc
           subdirectories: moduleA moduleB
 
-      - uses: GuillaumeFalourd/assert-command-line-output@v2
+      - uses: GuillaumeFalourd/assert-command-line-output@v2.3
         if: ${{ matrix.project == 'maven' }}
         with:
           command_line: cat target/site/apidocs/moduleA/apidocs/index.html

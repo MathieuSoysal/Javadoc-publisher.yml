@@ -3,6 +3,7 @@ name: Test Actions
 on:
   schedule:
     - cron: '0 0 * * *'
+  workflow_dispatch:
   pull_request:
     branches:
       - main
@@ -13,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: GuillaumeFalourd/assert-command-line-output@v2
+      - uses: GuillaumeFalourd/assert-command-line-output@v2.3
         with:
           command_line: cat pom.xml
           contains: JAVAVERSION
@@ -23,14 +24,18 @@ jobs:
     continue-on-error: true
     strategy:
       matrix:
-        java: [8, 11, 16, 17, 18, 19]
+        java: [8, 11, 17, 19, 21]
         java-distribution: [adopt, zulu, temurin, corretto, microsoft, liberica]
         os: [ubuntu-latest, windows-latest, macos-latest]
         project: [maven, gradle]
         exclude:
           - java: 8
-            java-distribution: microsoft
-          - java: 18
+            java-distribution: temurin
+            os: macos-latest
+          - java: 8
+            java-distribution: adopt
+            os: macos-latest
+          - java: 8
             java-distribution: microsoft
           - java: 19
             java-distribution: microsoft
@@ -76,13 +81,13 @@ jobs:
           without-checkout: true
           custom-command: gradle javadoc
 
-      - uses: GuillaumeFalourd/assert-command-line-output@v2
+      - uses: GuillaumeFalourd/assert-command-line-output@v2.3
         if: ${{ matrix.project == 'maven' }}
         with:
           command_line: cat target/site/apidocs/index.html
           contains: javadoc
 
-      - uses: GuillaumeFalourd/assert-command-line-output@v2
+      - uses: GuillaumeFalourd/assert-command-line-output@v2.3
         if: ${{ matrix.project == 'gradle' }}
         with:
           command_line: cat build/docs/javadoc/index.html
