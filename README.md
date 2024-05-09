@@ -1,7 +1,8 @@
 # Deploy Publish JavaDoc
 
-[![Public workflows that use this action.](https://img.shields.io/endpoint?url=https%3A%2F%2Fapi-endbug.vercel.app%2Fapi%2Fgithub-actions%2Fused-by%3Faction%3DMathieuSoysal%2FJavadoc-publisher%26badge%3Dtrue)](https://github.com/search?o=desc&q=MathieuSoysal+javadoc-publisher+path%3A.github%2Fworkflows+language%3AYAML&s=&type=code) [![Test Actions](https://github.com/MathieuSoysal/publish-javadoc/actions/workflows/test-action-final.yml/badge.svg)](https://github.com/MathieuSoysal/publish-javadoc/actions/workflows/test-action-final.yml)
-*(Tested on Java 8, 11, 17, 19, Maven, Gradle, Ubuntu, Macos, Windows)*
+[![Public workflows that use this action.](https://img.shields.io/endpoint?url=https%3A%2F%2Fapi-endbug.vercel.app%2Fapi%2Fgithub-actions%2Fused-by%3Faction%3DMathieuSoysal%2FJavadoc-publisher%26badge%3Dtrue)](https://github.com/search?o=desc&q=MathieuSoysal+javadoc-publisher+path%3A.github%2Fworkflows+language%3AYAML&s=&type=code)
+[![Test Actions](https://github.com/MathieuSoysal/publish-javadoc/actions/workflows/test-action-final.yml/badge.svg)](https://github.com/MathieuSoysal/publish-javadoc/actions/workflows/test-action-final.yml)
+*(Tested on Java 8, 11, 17, 19, 21, Maven, Gradle, Ubuntu, macOS, Windows)*
 
 Automatically generate Javadoc from your Java project and publish it to GitHub Page.
 
@@ -179,18 +180,18 @@ jobs:
 
 ### GitHub page
 
-Don't forget to configure your repository settings with your new GitHub Page. 😉
+Remember to configure your repository settings with your new GitHub Page. 😉
 
 <details>
 <summary>Help to set up the GitHub Pages settings in your repository</summary>
 
 
-If you need to use the specified directory to store the javadoc, You need to do this on your Settings page. like this.
+If you need to use the specified directory to store the javadoc, You need to do this on your Settings page. Like this.
 
 ![]()
 [<img src="https://user-images.githubusercontent.com/43273304/230144277-3714a61b-640e-49d4-b164-47598de8734b.jpg" width="900" alt="GitHub-Page-settings" />](https://user-images.githubusercontent.com/43273304/230144277-3714a61b-640e-49d4-b164-47598de8734b.jpg)
 
-Not only that, but if you have README.md file in your javadoc branch, the access will show up just as well. and Doing so
+Not only that, but if you have README.md file in your javadoc branch, the access will show up just as well. and doing so
 does not affect the javadoc commit.
 </details>
 
@@ -224,11 +225,11 @@ act workflow_dispatch -W .github/workflows/test-action-local.yml -P ubuntu-lates
 
 ## Contributors
 
-<img src="CONTRIBUTORS.svg"/>
+<img src="CONTRIBUTORS.svg" alt="Contributors"/>
 
 ## Stars 🎇
 
-If you like or use this project, please don't forget to give it a star ⭐️. Thanks!
+If you like or use this project, please remember to give it a star ⭐️. Thanks!
 
 ## License
 
