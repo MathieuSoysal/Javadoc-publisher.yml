@@ -1,13 +1,15 @@
 # Deploy Publish JavaDoc
+
 [![Public workflows that use this action.](https://img.shields.io/endpoint?url=https%3A%2F%2Fapi-endbug.vercel.app%2Fapi%2Fgithub-actions%2Fused-by%3Faction%3DMathieuSoysal%2FJavadoc-publisher%26badge%3Dtrue)](https://github.com/search?o=desc&q=MathieuSoysal+javadoc-publisher+path%3A.github%2Fworkflows+language%3AYAML&s=&type=code)
 [![Test Actions](https://github.com/MathieuSoysal/publish-javadoc/actions/workflows/test-action-final.yml/badge.svg)](https://github.com/MathieuSoysal/publish-javadoc/actions/workflows/test-action-final.yml)
 *(Tested on Java 8, 11, 17, 19, 21, Maven, Gradle, Ubuntu, macOS, Windows)*
 
-
 Automatically generate Javadoc from your Java project and publish it to GitHub Page.
 
 ## Requirements
-- Your project needs to use **Maven** or **Gradle**.
+
+- Your project need to use **Maven** or **Gradle**.
+
 <details>
 <summary>
 <h2>Inputs</h2>
@@ -17,6 +19,7 @@ Automatically generate Javadoc from your Java project and publish it to GitHub P
 |-----------------------|------------------------------------------------------------|---------------------|
 | java-version          | java version inside your project                           | 17                  |
 | GITHUB_TOKEN          | The GitHub token the GitHub repository                     |                     |
+| deploy-mode           | Deploy mode can be `branch` or `artifact`                  | branch              |
 | javadoc-branch        | Branch where the javadoc is hosted                         | javadoc             |
 | target-folder         | Directory where the javadoc contents should be stored      | .                   |
 | java-distribution     | Java distribution inside your project                      | adopt               |
@@ -64,6 +67,7 @@ jobs:
           project: maven # or gradle
           # subdirectories: moduleA moduleB #for subdirectories support, needs to be run with custom command
 ```
+
 </details>
 
 ### For Gradle project
@@ -72,8 +76,6 @@ The workflow, usually declared in `.github/workflows/publish-javadoc.yml`, looks
 
 <details open>
 <summary>.github/workflows/publish-javadoc-gradle.yml</summary>
-
-
 
 ```YAML
 name: Deploy Javadoc
@@ -96,14 +98,19 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           javadoc-branch: javadoc
           java-version: 17
-          target-folder: javadoc 
+          target-folder: javadoc
           project: gradle
 ```
+
 </details>
 
 ### With custom command for generating Javadoc
 
-If you want to use a custom command for generating Javadoc, you can use the `custom-command` input. This input is a string that will be executed in the root of your project. For example, if you want to use the `javadoc` command, you can use the following workflow:
+If you want to use a custom command for generating Javadoc, you can use the `custom-command` input.
+This input is a
+string that will be executed in the root of your project.
+For example, if you want to use the `javadoc` command, you can
+use the following workflow:
 
 <details open>
 <summary>.github/workflows/publish-javadoc-custom-command.yml</summary>
@@ -129,11 +136,47 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           javadoc-branch: javadoc
           java-version: 17
-          target-folder: javadoc 
+          target-folder: javadoc
           project: gradle
           custom-command: javadoc -d javadoc -sourcepath src/main/java -subpackages .
 ```
+
 </details>
+
+### Deploy with artifact
+
+If you want to deploy the javadoc as an artifact, you can use the `deploy-mode` input.
+Set the `deploy-mode` to `artifact` and the javadoc will be deployed as an artifact, so you don't need a javadoc branch.
+
+```YAML
+name: Deploy Javadoc
+
+on:
+  push:
+    branches:
+      - master
+      - main
+concurrency:
+  group: pages
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      permissions:
+        contents: read
+        pages: write
+        id-token: write
+    steps:
+      - name: Deploy JavaDoc 🚀
+        uses: MathieuSoysal/Javadoc-publisher.yml@v2.5.0
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          deploy-mode: artifact
+          java-version: 17
+          project: maven # or gradle
+          # subdirectories: moduleA moduleB #for subdirectories support, needs to be run with custom command
+```
 
 ### GitHub page
 
@@ -145,12 +188,11 @@ Remember to configure your repository settings with your new GitHub Page. 😉
 
 If you need to use the specified directory to store the javadoc, You need to do this on your Settings page. Like this.
 
-
 ![]()
 [<img src="https://user-images.githubusercontent.com/43273304/230144277-3714a61b-640e-49d4-b164-47598de8734b.jpg" width="900" alt="GitHub-Page-settings" />](https://user-images.githubusercontent.com/43273304/230144277-3714a61b-640e-49d4-b164-47598de8734b.jpg)
 
-Not only that, but if you have README.md file in your javadoc branch, the access will show up just as well.
-And Doing so does not affect the javadoc commit.
+Not only that, but if you have README.md file in your javadoc branch, the access will show up just as well. and doing so
+does not affect the javadoc commit.
 </details>
 
 ### Badge
@@ -158,17 +200,22 @@ And Doing so does not affect the javadoc commit.
 ```Markdown
 [![Javadoc](https://img.shields.io/badge/JavaDoc-Online-green)](https://YOUR-USERNAME.github.io/YOUR-REPO/javadoc/)
 ```
-In the badge link, replace *YOUR-USERNAME* with your GitHub Username and replace *YOUR-REPO* with the name of your GitHub repository.
+
+In the badge link, replace *YOUR-USERNAME* with your GitHub Username and replace *YOUR-REPO* with the name of your
+GitHub repository.
 
 ## Contributing
 
-Want to contribute to Javadoc Publisher? Awesome! Check out [the contributing guidelines](CONTRIBUTING.md) to get involved.
+Want to contribute to Javadoc Publisher? Awesome! Check out [the contributing guidelines](CONTRIBUTING.md) to get
+involved.
 
 ### Requirements to your environment to test in locally
 
-- Install [nektos/act](https://github.com/nektos/act) & clone the repo `git clone git@github.com:MathieuSoysal/Javadoc-publisher.yml.git`  
-OR
-- Use the devcontainer of the repo: with [GitHub Codespaces](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=441722764)
+- Install [nektos/act](https://github.com/nektos/act) & clone the
+  repo `git clone git@github.com:MathieuSoysal/Javadoc-publisher.yml.git`  
+  OR
+- Use the devcontainer of the repo:
+  with [GitHub Codespaces](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=441722764)
 
 ### Command to test your changes
 
@@ -177,6 +224,7 @@ act workflow_dispatch -W .github/workflows/test-action-local.yml -P ubuntu-lates
 ```
 
 ## Contributors
+
 <img src="CONTRIBUTORS.svg" alt="Contributors"/>
 
 ## Stars 🎇
@@ -184,4 +232,6 @@ act workflow_dispatch -W .github/workflows/test-action-local.yml -P ubuntu-lates
 If you like or use this project, please remember to give it a star ⭐️. Thanks!
 
 ## License
-The Dockerfile and associated scripts and documentation in this project are released under the [Apache 2.0 License](https://github.com/MathieuSoysal/publish-javadoc/blob/main/LICENSE).
+
+The Dockerfile and associated scripts and documentation in this project are released under
+the [Apache 2.0 License](https://github.com/MathieuSoysal/publish-javadoc/blob/main/LICENSE).
