@@ -8,7 +8,7 @@
       "extensions": [
 		"GitHub.copilot",
 		"GitHub.copilot-labs",
-		"cschleiden.vscode-github-actions",
+		"github.vscode-github-actions",
 		"redhat.vscode-yaml"
 	]
     }
