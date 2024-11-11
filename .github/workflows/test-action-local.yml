@@ -8,7 +8,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: GuillaumeFalourd/assert-command-line-output@v2.3
+      - uses: GuillaumeFalourd/assert-command-line-output@v2.4
         with:
           command_line: cat pom.xml
           contains: JAVAVERSION
@@ -57,7 +57,7 @@ jobs:
           without-deploy: true
           without-checkout: true
 
-      - uses: GuillaumeFalourd/assert-command-line-output@v2.3
+      - uses: GuillaumeFalourd/assert-command-line-output@v2.4
         if: ${{ matrix.project == 'maven' }}
         with:
           command_line: cat target/site/apidocs/index.html
