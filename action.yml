@@ -100,7 +100,7 @@ runs:
     - name: Handle subdirectories for GitHub Pages
       if: ${{ inputs.subdirectories != '' }}
       run: |
-        source_folder=${{ steps.set-source_folder.outputs.javadoc-source-folder }}
+        source_folder=${{ steps.set-javadoc-source-folder.outputs.javadoc-source-folder }}
         
         if [ ! -d $source_folder ]; then
           mkdir -p $source_folder
