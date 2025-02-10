@@ -88,14 +88,14 @@ runs:
       shell: bash
 
     - name: Set Javadoc source folder
-    id: set-javadoc-source-folder
-    run: |
-      if [ ${{ inputs.project }} == "gradle"  && ${{ inputs.javadoc-source-folder }} == "target/site/apidocs" ]; then
-        echo "javadoc-source-folder=build/docs/javadoc" >> "$GITHUB_OUTPUT"
-      else
-        echo "javadoc-source-folder=${{ inputs.javadoc-source-folder }}" >> "$GITHUB_OUTPUT"
-      fi
-    shell: bash
+      id: set-javadoc-source-folder
+      run: |
+        if [ ${{ inputs.project }} == "gradle"  && ${{ inputs.javadoc-source-folder }} == "target/site/apidocs" ]; then
+          echo "javadoc-source-folder=build/docs/javadoc" >> "$GITHUB_OUTPUT"
+        else
+          echo "javadoc-source-folder=${{ inputs.javadoc-source-folder }}" >> "$GITHUB_OUTPUT"
+        fi
+      shell: bash
 
     - name: Handle subdirectories for GitHub Pages
       if: ${{ inputs.subdirectories != '' }}
