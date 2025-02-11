@@ -60,5 +60,5 @@ jobs:
       - uses: GuillaumeFalourd/assert-command-line-output@v2.3
         if: ${{ matrix.project == 'maven' }}
         with:
-          command_line: cat target/site/apidocs/index.html
+          command_line: cat target/reports/apidocs/index.html
           contains: javadoc
