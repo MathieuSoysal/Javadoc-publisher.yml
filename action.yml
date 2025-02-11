@@ -46,7 +46,7 @@ inputs:
   javadoc-source-folder:
     description: "Custom path for the new Javadoc"
     required: false
-    default: target/site/apidocs
+    default: target/reports/apidocs
 
   # Development and testing inputs
   without-deploy: # deploy the javadoc to the GitHub Page, is used for development testing with nektos/act
@@ -90,8 +90,10 @@ runs:
     - name: Set Javadoc source folder
       id: set-javadoc-source-folder
       run: |
-        if [[ ${{ inputs.project }} == "gradle" && ${{ inputs.javadoc-source-folder }} == "target/site/apidocs" ]]; then
+        if [[ ${{ inputs.project }} == "gradle" && ${{ inputs.javadoc-source-folder }} == "target/reports/apidocs" ]]; then
           echo "javadoc-source-folder=build/docs/javadoc" >> "$GITHUB_OUTPUT"
+        elif [ ! -d ${{ inputs.javadoc-source-folder }} ]; then
+          echo "javadoc-source-folder=target/site/apidocs" >> "$GITHUB_OUTPUT"
         else
           echo "javadoc-source-folder=${{ inputs.javadoc-source-folder }}" >> "$GITHUB_OUTPUT"
         fi

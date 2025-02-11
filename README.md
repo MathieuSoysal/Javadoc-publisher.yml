@@ -28,7 +28,7 @@ Automatically generate Javadoc from your Java project and publish it to GitHub P
 | subdirectories        | Custom subdirectories to upload from                       |                     |
 | without-deploy        | Enable or disable deploy of the javadoc to the GitHub Page | false               |
 | without-checkout      | Enable or disable the checkout                             | false               |
-| javadoc-source-folder | The folder where our project generate the JavaDoc          | target/site/apidocs |
+| javadoc-source-folder | The folder where our project generate the JavaDoc          | target/reports/apidocs |
 
 </details>
 
