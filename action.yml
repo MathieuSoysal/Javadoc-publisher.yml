@@ -93,13 +93,13 @@ runs:
         maven_pre_javadoc_3_10_x="target/site/apidocs"
         maven_post_javadoc_3_10_x="target/reports/apidocs"
         
-        if [[ ! ${{ inputs.javadoc-source-folder }} == "" ]]; then
+        if [[ ! "${{ inputs.javadoc-source-folder }}" == "" ]]; then
           echo "::notice Using custom 'javadoc-source-folder': '${{ inputs.javadoc-source-folder }}'"
           echo "javadoc-source-folder=${{ inputs.javadoc-source-folder }}" >> "$GITHUB_OUTPUT"
           exit 0
         fi
         
-        if [[ ${{ inputs.project }} == "gradle" ]]; then
+        if [[ "${{ inputs.project }}" == "gradle" ]]; then
           echo "::notice No custom 'javadoc-source-folder' was provided, using default Gradle path '$gradle_path'"
           echo "javadoc-source-folder=$gradle_path" >> "$GITHUB_OUTPUT"
           exit 0
@@ -107,7 +107,7 @@ runs:
         
         # Else assuming Maven as inputs.project for backwards compatiblity
         subdir_prefix=""
-        if [[ ! ${{ inputs.subdirectories }} == "" ]]; then
+        if [[ ! "${{ inputs.subdirectories }}" == "" ]]; then
           subdir_prefix=$(echo $subdirectories | tr " " "\n" | head -n 1)/
           echo "::notice Checking for maven-javadoc-plugin output in the first subdirectory '$subdir_prefix'"
         fi
