@@ -94,13 +94,13 @@ runs:
         maven_post_javadoc_3_10_x="target/reports/apidocs"
         
         if [[ ! "${{ inputs.javadoc-source-folder }}" == "" ]]; then
-          echo "::notice Using custom 'javadoc-source-folder': '${{ inputs.javadoc-source-folder }}'"
+          echo "::notice::Using custom 'javadoc-source-folder': '${{ inputs.javadoc-source-folder }}'"
           echo "javadoc-source-folder=${{ inputs.javadoc-source-folder }}" >> "$GITHUB_OUTPUT"
           exit 0
         fi
         
         if [[ "${{ inputs.project }}" == "gradle" ]]; then
-          echo "::notice No custom 'javadoc-source-folder' was provided, using default Gradle path '$gradle_path'"
+          echo "::notice::No custom 'javadoc-source-folder' was provided, using default Gradle path '$gradle_path'"
           echo "javadoc-source-folder=$gradle_path" >> "$GITHUB_OUTPUT"
           exit 0
         fi
@@ -109,18 +109,18 @@ runs:
         subdir_prefix=""
         if [[ ! "${{ inputs.subdirectories }}" == "" ]]; then
           subdir_prefix=$(echo ${{ inputs.subdirectories }} | tr " " "\n" | head -n 1)/
-          echo "::notice Checking for maven-javadoc-plugin output in the first subdirectory '$subdir_prefix'"
+          echo "::notice::Checking for maven-javadoc-plugin output in the first subdirectory '$subdir_prefix'"
         fi
         
         # Checking for plugin outputs to determine maven-javadoc-plugin version
         if [[ -d "$subdir_prefix$maven_pre_javadoc_3_10_x" ]]; then
-          echo "::notice Detected maven-javadoc-plugin output with version older than 3.10.0, using path '$maven_pre_javadoc_3_10_x'"
+          echo "::notice::Detected maven-javadoc-plugin output with version older than 3.10.0, using path '$maven_pre_javadoc_3_10_x'"
           echo "javadoc-source-folder=$maven_pre_javadoc_3_10_x" >> "$GITHUB_OUTPUT"
         elif [[ -d "$subdir_prefix$maven_post_javadoc_3_10_x" ]]; then
-          echo "::notice Detected maven-javadoc-plugin output with version newer than 3.10.0, using path '$maven_post_javadoc_3_10_x'"
+          echo "::notice::Detected maven-javadoc-plugin output with version newer than 3.10.0, using path '$maven_post_javadoc_3_10_x'"
           echo "javadoc-source-folder=$maven_post_javadoc_3_10_x" >> "$GITHUB_OUTPUT"
         else
-          echo "::error Could not find maven-javadoc-plugin output on the default path(s) ($maven_pre_javadoc_3_10_x for versions older than 3.10.0, or $maven_post_javadoc_3_10_x for 3.10.0+) and no custom value was provided for 'javadoc-source-path' input."
+          echo "::error::Could not find maven-javadoc-plugin output on the default path(s) ($maven_pre_javadoc_3_10_x for versions older than 3.10.0, or $maven_post_javadoc_3_10_x for 3.10.0+) and no custom value was provided for 'javadoc-source-path' input."
           exit 1
         fi
       shell: bash
