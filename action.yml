@@ -108,7 +108,7 @@ runs:
         # Else assuming Maven as inputs.project for backwards compatiblity
         subdir_prefix=""
         if [[ ! "${{ inputs.subdirectories }}" == "" ]]; then
-          subdir_prefix=$(echo $subdirectories | tr " " "\n" | head -n 1)/
+          subdir_prefix=$(echo ${{ inputs.subdirectories }} | tr " " "\n" | head -n 1)/
           echo "::notice Checking for maven-javadoc-plugin output in the first subdirectory '$subdir_prefix'"
         fi
         
