@@ -133,7 +133,7 @@ runs:
         if [ ! -d $source_folder ]; then
           mkdir -p $source_folder
         fi
-        dirs=$(echo ${{ inputs.subdirectories }} | tr " " "\n")
+        dirs=$(echo "${{ inputs.subdirectories }}" | tr " " "\n")
         
         for dir in $dirs
         do
