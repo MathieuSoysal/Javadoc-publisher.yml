@@ -28,7 +28,17 @@ Automatically generate Javadoc from your Java project and publish it to GitHub P
 | subdirectories        | Custom subdirectories to upload from                       |                     |
 | without-deploy        | Enable or disable deploy of the javadoc to the GitHub Page | false               |
 | without-checkout      | Enable or disable the checkout                             | false               |
-| javadoc-source-folder | The folder where our project generate the JavaDoc          | target/site/apidocs |
+| javadoc-source-folder | The folder where our project generate the JavaDoc          | default location based on the build tool<sup>[1]</sup> |
+
+
+<sup>[1]</sup>: The default value of the `javadoc-source-folder` is determined dynamically based on the build tool (`project` input).
+For Maven the action will search for the plugin output in the possible output directories to find the correct path.
+  
+| project     | `maven-javadoc-plugin` version (detected)          | default                          |
+|-------------|----------------------------------------------------|----------------------------------|
+| gradle      | Not affected                                       | `build/docs/javadoc`             |
+| maven       | older than `3.10.0`                                | `target/site/apidocs`            |
+| maven       | newer than `3.10.0`                                | `target/reports/apidocs`         |
 
 </details>
 

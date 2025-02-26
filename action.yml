@@ -46,7 +46,6 @@ inputs:
   javadoc-source-folder:
     description: "Custom path for the new Javadoc"
     required: false
-    default: target/site/apidocs
 
   # Development and testing inputs
   without-deploy: # deploy the javadoc to the GitHub Page, is used for development testing with nektos/act
@@ -87,30 +86,61 @@ runs:
       run: ${{ inputs.custom-command }}
       shell: bash
 
-    - name: Handle subdirectories for GitHub Pages
-      if: ${{ inputs.subdirectories != '' }}
-      run: |
-        if [ ! -d ${{ inputs.javadoc-source-folder }}]; then
-          mkdir -p ${{ inputs.javadoc-source-folder }}
-        fi
-        dirs=$(echo ${{ inputs.subdirectories }} | tr " " "\n")
-        
-        for dir in $dirs
-        do
-          mkdir -p ${{ inputs.javadoc-source-folder }}/$dir
-          cp -r $dir/${{ inputs.javadoc-source-folder }} ${{ inputs.javadoc-source-folder }}/$dir
-        done
-        ls -R ${{ inputs.javadoc-source-folder }}
-      shell: bash
-
     - name: Set Javadoc source folder
       id: set-javadoc-source-folder
       run: |
-        if [ ${{ inputs.project }} == "gradle"  && ${{ inputs.javadoc-source-folder }} == "target/site/apidocs" ]; then
-          echo "javadoc-source-folder=build/docs/javadoc" >> "$GITHUB_OUTPUT"
-        else
+        gradle_path="build/docs/javadoc"
+        maven_pre_javadoc_3_10_x="target/site/apidocs"
+        maven_post_javadoc_3_10_x="target/reports/apidocs"
+        
+        if [[ ! "${{ inputs.javadoc-source-folder }}" == "" ]]; then
+          echo "::notice::Using custom 'javadoc-source-folder': '${{ inputs.javadoc-source-folder }}'"
           echo "javadoc-source-folder=${{ inputs.javadoc-source-folder }}" >> "$GITHUB_OUTPUT"
+          exit 0
         fi
+        
+        if [[ "${{ inputs.project }}" == "gradle" ]]; then
+          echo "::notice::No custom 'javadoc-source-folder' was provided, using default Gradle path '$gradle_path'"
+          echo "javadoc-source-folder=$gradle_path" >> "$GITHUB_OUTPUT"
+          exit 0
+        fi
+        
+        # Else assuming Maven as inputs.project for backwards compatiblity
+        subdir_prefix=""
+        if [[ ! "${{ inputs.subdirectories }}" == "" ]]; then
+          subdir_prefix=$(echo ${{ inputs.subdirectories }} | tr " " "\n" | head -n 1)/
+          echo "::notice::Checking for maven-javadoc-plugin output in the first subdirectory '$subdir_prefix'"
+        fi
+        
+        # Checking for plugin outputs to determine maven-javadoc-plugin version
+        if [[ -d "$subdir_prefix$maven_pre_javadoc_3_10_x" ]]; then
+          echo "::notice::Detected maven-javadoc-plugin output with version older than 3.10.0, using path '$maven_pre_javadoc_3_10_x'"
+          echo "javadoc-source-folder=$maven_pre_javadoc_3_10_x" >> "$GITHUB_OUTPUT"
+        elif [[ -d "$subdir_prefix$maven_post_javadoc_3_10_x" ]]; then
+          echo "::notice::Detected maven-javadoc-plugin output with version newer than 3.10.0, using path '$maven_post_javadoc_3_10_x'"
+          echo "javadoc-source-folder=$maven_post_javadoc_3_10_x" >> "$GITHUB_OUTPUT"
+        else
+          echo "::error::Could not find maven-javadoc-plugin output on the default path(s) ($maven_pre_javadoc_3_10_x for versions older than 3.10.0, or $maven_post_javadoc_3_10_x for 3.10.0+) and no custom value was provided for 'javadoc-source-path' input."
+          exit 1
+        fi
+      shell: bash
+
+    - name: Handle subdirectories for GitHub Pages
+      if: ${{ inputs.subdirectories != '' }}
+      run: |
+        source_folder=${{ steps.set-javadoc-source-folder.outputs.javadoc-source-folder }}
+        
+        if [ ! -d $source_folder ]; then
+          mkdir -p $source_folder
+        fi
+        dirs=$(echo "${{ inputs.subdirectories }}" | tr " " "\n")
+        
+        for dir in $dirs
+        do
+          mkdir -p $source_folder/$dir
+          cp -r $dir/$source_folder $source_folder/$dir
+        done
+        ls -R $source_folder
       shell: bash
 
     - name: Deploy to GitHub Page Branch 🚀
