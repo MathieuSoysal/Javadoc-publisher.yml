@@ -155,7 +155,7 @@ runs:
 
     - name: Deploy to GitHub Page Artifact 🚀
       if: ${{ inputs.deploy-mode == 'artifact' && inputs.without-deploy == 'false' }}
-      uses: actions/upload-pages-artifact@v3
+      uses: actions/upload-pages-artifact@v4
       with:
         path: ${{ steps.set-javadoc-source-folder.outputs.javadoc-source-folder }}
 
