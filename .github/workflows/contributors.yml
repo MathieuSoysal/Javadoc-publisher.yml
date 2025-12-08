@@ -10,7 +10,7 @@ jobs:
   contributors:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       
       # Changes for the PR
       - uses: wow-actions/contributors-list@v1
